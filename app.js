@@ -8,7 +8,7 @@ const productsRouter = require('./api/routes/products');
 const ordersRouter = require('./api/routes/orders');
 const userRouter = require('./api/routes/users')
 
-mongoose.connect('mongodb+srv://hemant:hemant@node-rest-shop-iqovk.mongodb.net/test?retryWrites=true', {
+mongoose.connect('mongodb+srv://hemant:'+ process.env.MONGO_ATLAS_PW+'@node-rest-shop-iqovk.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser : true
 }).then(() => {
     console.log('database connected successfully'); 
@@ -32,6 +32,9 @@ app.use((req, res, next) => {
 })
 
 app.use('/uploads', express.static('uploads'))
+
+
+//ROUTES
 app.use('/products', productsRouter);
 app.use('/orders', ordersRouter);
 app.use('/user', userRouter);
